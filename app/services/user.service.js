@@ -87,9 +87,13 @@ module.exports = {
                 let employeeDetail = await Users.findOne({
                     where: {
                         id: params.employeeId
-                    }
+                    },
+                    attributes: [['id', 'employeeId'], ['employee_name', 'employeeName'], 'email', 'mobile', ['created_at', 'createdAt']]
                 })
-                return resolve(employeeDetail);
+                if(!employeeDetail){
+                    throw Error("EMPLOYEE_NOT_FOUND");
+                }
+                return resolve({data: employeeDetail.toJSON()});
             } catch (error) {
                 return reject(error)
             }
@@ -113,6 +117,20 @@ module.exports = {
                 }                
                 dataTobeUpdate.updated_at = helper.epochTimestamp();                
                 await Users.update(dataTobeUpdate, {
+                    where: {
+                        id: params.employeeId
+                    }
+                })
+                return resolve("SUCEESS");
+            } catch (error) {
+                return reject(error)
+            }
+        })
+    },
+    deleteEmployee: params => {
+        return new Promise(async(resolve, reject) => {
+            try {              
+                await Users.destroy({
                     where: {
                         id: params.employeeId
                     }

@@ -3,7 +3,6 @@ const app = express();
 const cors = require("cors");
 
 require("dotenv").config();
-require('express-async-errors');
 
 
 app.use(express.urlencoded({limit: '3000mb', extended: false, parameterLimit: 100000}));
@@ -37,6 +36,6 @@ app.use((error, req, res, next) => {
 });
 //end
 
-app.listen(process.env.SERVER_PORT, function(){
+app.listen(process.env.SERVER_PORT || 9000, function(){
     console.log('Server is running on '+ process.env.SERVER_PORT);
 });

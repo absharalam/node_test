@@ -10,6 +10,7 @@ route.post('/employee', userCtrl.createEmployee);
 route.get('/employee', userCtrl.getEmployeeList);
 route.get('/employee/:employeeId', userCtrl.getEmployeeDetail);
 route.put('/employee/:employeeId', userCtrl.updateEmployeeDetail);
+route.delete('/employee/:employeeId', userCtrl.deleteEmployee);
 // ############### End ###########################
 
 

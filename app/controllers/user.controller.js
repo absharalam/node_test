@@ -1,6 +1,6 @@
 'use strict'
 
-const responseService = require('../services/response.service');
+const responseService = require('../services/response.service.js');
 const userService = require('../services/user.service');
 
 module.exports = {
@@ -61,6 +61,18 @@ module.exports = {
             return responseService.internelServerError(res, error.message);
         })
     },
+    deleteEmployee: (req, res) => {
+        if(req.params.employeeId === undefined || req.params.employeeId === null || req.params.employeeId === ""){
+            return responseService.badParameter(res, "employeeId is missing");
+        }
+        return userService.deleteEmployee(req.params)
+        .then(() => {
+            return responseService.success(res, "EMPLOYEE_DELETED", 204);
+        })
+        .catch(error => {
+            return responseService.internelServerError(res, error.message);
+        })
+    }
 
    
 }
