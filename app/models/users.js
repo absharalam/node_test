@@ -13,12 +13,8 @@ Users.init({
         primaryKey: true,
         autoIncrement: true
     },
-    first_name: {
+    employee_name: {
         type: Sequelize.STRING,
-    },
-    last_name: {
-        type: Sequelize.STRING,
-        allowNull: true
     },
     email: {
         type: Sequelize.STRING,

@@ -5,11 +5,8 @@ const userService = require('../services/user.service');
 
 module.exports = {
     createEmployee: (req, res) => {
-        if(req.body.firstName === undefined || req.body.firstName === null || req.body.firstName === ""){
+        if(req.body.employeeName === undefined || req.body.employeeName === null || req.body.employeeName === ""){
             return responseService.badParameter(res, "firstName is missing");
-        }
-        if(req.body.lastName === undefined || req.body.lastName === null || req.body.lastName === ""){
-            return responseService.badParameter(res, "lastName is missing");
         }
         if(req.body.email === undefined || req.body.email === null || req.body.email === ""){
             return responseService.badParameter(res, "email is missing");
@@ -29,5 +26,41 @@ module.exports = {
             return responseService.internelServerError(res, error.message);
         })
     },
+    getEmployeeList: (req, res) => {
+        return userService.getEmployeeList(req.query)
+        .then((data) => {
+            return responseService.successWithData(res, data);
+        })
+        .catch(error => {
+            return responseService.internelServerError(res, error.message);
+        })
+    },
+    getEmployeeDetail: (req, res) => {
+        if(req.params.employeeId === undefined || req.params.employeeId === null || req.params.employeeId === ""){
+            return responseService.badParameter(res, "employeeId is missing");
+        }
+        return userService.getEmployeeDetail(req.params)
+        .then((data) => {
+            return responseService.successWithData(res, data);
+        })
+        .catch(error => {
+            return responseService.internelServerError(res, error.message);
+        })
+    },
+    updateEmployeeDetail: (req, res) => {
+        if(req.params.employeeId === undefined || req.params.employeeId === null || req.params.employeeId === ""){
+            return responseService.badParameter(res, "employeeId is missing");
+        }
+        req.body.employeeId = req.params.employeeId;
+        
+        return userService.updateEmployeeDetail(req.body)
+        .then(() => {
+            return responseService.success(res, "EMPLOYEE_UPDATED");
+        })
+        .catch(error => {
+            return responseService.internelServerError(res, error.message);
+        })
+    },
+
    
 }
