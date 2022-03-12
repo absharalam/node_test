@@ -1,7 +1,12 @@
 # node_test
 Sulhuf Company test
 
-API LIST
+Clone Code And execute command npm init
+
+Then create .env file in project root directory to manage enivronment
+
+
+**API LIST**
 
 POST http://localhost:9000/employee
   request: {
