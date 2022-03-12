@@ -5,6 +5,7 @@ Clone Code And execute command **npm init**
 
 Then create .env file in project root directory to manage enivronment
 
+Database: **MySql**
 
 **API LIST**
 
