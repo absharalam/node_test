@@ -1,7 +1,7 @@
 # node_test
 Sulhuf Company test
 
-Clone Code And execute command npm init
+Clone Code And execute command **npm init**
 
 Then create .env file in project root directory to manage enivronment
 
